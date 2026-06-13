@@ -69,9 +69,13 @@ The Settings sidebar item renders (in current Home Assistant) as:
 The module injects a small stylesheet into the `ha-sidebar` shadow root:
 
 ```css
-ha-md-list-item.configuration .badge,
-ha-md-list-item#sidebar-config .badge { display: none !important; }
+.configuration .badge,
+#sidebar-config .badge { display: none !important; }
 ```
+
+The selector targets the stable `configuration` class / `sidebar-config` id
+rather than the element tag, which HA has renamed across versions
+(`paper-icon-item` → `ha-md-list-item` → `ha-list-item-button`).
 
 It re-applies on navigation and tab focus so it survives sidebar
 collapse/expand. It is independent of your active theme, switching themes will
@@ -79,10 +83,11 @@ not break it.
 
 ## Compatibility
 
-Works on **Home Assistant 2025.5+** (when the sidebar moved to the
-`ha-md-list-item` markup this targets); verified on **2026.5.x**. Because it
-targets frontend markup, a future Home Assistant release that renames the
-sidebar element could require a one-line selector update. Issues/PRs welcome.
+Verified on **2026.6.x**. The selector targets the `configuration` class /
+`sidebar-config` id, which have stayed stable even as HA renamed the underlying
+element (`paper-icon-item` → `ha-md-list-item` → `ha-list-item-button`), so it
+should survive most frontend updates. If a future release changes those
+identifiers, it could require a one-line selector update. Issues/PRs welcome.
 
 ## License
 

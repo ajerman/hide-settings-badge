@@ -10,8 +10,10 @@
  * Lovelace dashboard resource, because it styles the app sidebar rather than a
  * dashboard card.
  *
- * Verified against Home Assistant 2026.5.x. The config item renders as
- *   <ha-md-list-item class="configuration" id="sidebar-config" href="/config">
+ * Verified against Home Assistant 2026.6.x. The config item renders with a
+ * stable class/id across versions:
+ *   <ha-list-item-button class="configuration" id="sidebar-config" href="/config">
+ * (the element tag has changed over time, hence the tag-agnostic selector)
  * with a <span class="badge"> in slot="start" (collapsed sidebar) and another
  * in slot="end" (expanded sidebar). Both are hidden.
  *
@@ -22,9 +24,14 @@
   "use strict";
 
   const STYLE_ID = "hide-settings-badge-style";
+  // Target by the stable class/id of the Settings (config) sidebar item rather
+  // than its element tag. HA has renamed this element across versions
+  // (paper-icon-item -> ha-md-list-item -> ha-list-item-button), but the
+  // `configuration` class and `sidebar-config` id have stayed constant, so a
+  // tag-agnostic selector survives those renames.
   const CSS = `
-    ha-md-list-item.configuration .badge,
-    ha-md-list-item#sidebar-config .badge {
+    .configuration .badge,
+    #sidebar-config .badge {
       display: none !important;
     }
   `;
