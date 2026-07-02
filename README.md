@@ -83,7 +83,7 @@ not break it.
 
 ## Compatibility
 
-Verified on **2026.6.x**. The selector targets the `configuration` class /
+Verified on **2026.7.x**. The selector targets the `configuration` class /
 `sidebar-config` id, which have stayed stable even as HA renamed the underlying
 element (`paper-icon-item` → `ha-md-list-item` → `ha-list-item-button`), so it
 should survive most frontend updates. If a future release changes those
